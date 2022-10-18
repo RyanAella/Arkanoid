@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5481144301555625391
+--- !u!1 &1990470023157017122
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5481144301555625395}
-  - component: {fileID: 5481144301555625392}
-  - component: {fileID: 5481144301555625393}
-  - component: {fileID: 5481144301555625397}
-  - component: {fileID: 5481144301555625390}
-  - component: {fileID: 5481144301555625394}
+  - component: {fileID: 1990470023157017129}
+  - component: {fileID: 1990470023157017134}
+  - component: {fileID: 1990470023157017135}
+  - component: {fileID: 1990470023157017128}
+  - component: {fileID: 1990470023157017132}
+  - component: {fileID: 1990470023157017133}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5481144301555625395
+--- !u!4 &1990470023157017129
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5481144301555625391}
+  m_GameObject: {fileID: 1990470023157017122}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.25, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0.25, z: -4.1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5481144301555625392
+--- !u!33 &1990470023157017134
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5481144301555625391}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &5481144301555625393
+  m_GameObject: {fileID: 1990470023157017122}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &1990470023157017135
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5481144301555625391}
+  m_GameObject: {fileID: 1990470023157017122}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -86,13 +86,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &5481144301555625397
+--- !u!54 &1990470023157017128
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5481144301555625391}
+  m_GameObject: {fileID: 1990470023157017122}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -102,33 +102,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &5481144301555625390
-CapsuleCollider:
+--- !u!135 &1990470023157017132
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5481144301555625391}
+  m_GameObject: {fileID: 1990470023157017122}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
+  serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5481144301555625394
+--- !u!114 &1990470023157017133
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5481144301555625391}
+  m_GameObject: {fileID: 1990470023157017122}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad0712dd93c4bb34a99ba5b31c0e8b43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 2139036925225532604, guid: ffad87e6e5f9d5d4ebd44dc309db5217, type: 3}
-  ground: {fileID: 6503724731852047921, guid: 7ca9e8b15c0910049976d63c600e6ba6, type: 3}
-  paddle: {fileID: 9106213541173583485, guid: f1b1bd54f5ed2064ea19e2204b54356c, type: 3}
-  speed: -3
+  speed: 5
+  mask:
+    serializedVersion: 2
+    m_Bits: 64
