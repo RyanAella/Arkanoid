@@ -1,25 +1,76 @@
-using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace _Scripts.UI
 {
     public class VictoryBehaviour : MonoBehaviour
     {
+        private static string _message;
+
+        private static int _nextLevelIndex = 0;
+
         private TextMeshProUGUI victoryText;
-    
-        // Start is called before the first frame update
-        void Start()
+
+        private void Awake()
         {
-            victoryText = GetComponent<TextMeshProUGUI>();
+            var maxIndex = SceneManager.sceneCountInBuildSettings - 1;
+            var activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+            Debug.Log("Scene Count Build Index: " + SceneManager.sceneCountInBuildSettings);
+
+            if (maxIndex == activeSceneIndex)
+            {
+                GameObject.Find("RestartLevelButton").SetActive(false);
+            }
         }
 
-        // Update is called once per frame
+        private void Start()
+        {
+            victoryText = GameObject.Find("Victory Text").GetComponent<TextMeshProUGUI>();
+        }
+
         void Update()
         {
             var time = GameManager.time;
             var vTime = time.ToString("F2");
-            victoryText.SetText("Score: {0} \nTime: {1} \nYou lost", ScoreBehaviour.score, Convert.ToSingle(vTime));
+            var score = ScoreBehaviour.score;
+
+            victoryText.SetText("Score: " + score + "\nTime: " + vTime + "\n \nYou " + _message);
+        }
+
+        public static void SetMessage(bool win)
+        {
+            var maxIndex = SceneManager.sceneCountInBuildSettings - 1;
+            var activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+            if (!(maxIndex == activeSceneIndex))
+            {
+                var buttonText = GameObject.Find("RestartLevelButton").GetComponentInChildren<TextMeshProUGUI>();
+                
+                if (win)
+                {
+                    _nextLevelIndex = activeSceneIndex + 1;
+                    buttonText.SetText("Next Level");
+                }
+                else
+                {
+                    _nextLevelIndex = activeSceneIndex;
+                    buttonText.SetText("Restart Level");
+                }
+            }
+
+            _message = win ? "won" : "lost";
+        }
+
+        public void RestartOrNextLevel()
+        {
+            SceneManager.LoadScene(_nextLevelIndex);
+        }
+
+        public void BackToMainMenu()
+        {
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }

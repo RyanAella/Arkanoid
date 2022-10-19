@@ -3,6 +3,7 @@
     public enum PowerUpType
     {
         IncreasePaddleSize,
-        IncreasePaddleSpeed
+        IncreasePaddleSpeed,
+        IncreaseBallNumber
     }
 }

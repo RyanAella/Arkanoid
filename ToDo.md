@@ -44,10 +44,10 @@
 - [x] Schläger erkennt Spielfeldrand
 - [x] StartMenu
   - [x] Neues Spiel
-  - [ ] Levelauswahl
+  - [x] Levelauswahl
 - [x] **Vor Abgabe: Coderefactoring**
-- [ ] Größere Blöcke
-- [ ] Win/Loose Anzeige
+- [x] Größere Blöcke
+- [x] Win/Loose Anzeige
 - [ ] Drittes PowerUp einfügen
 - [ ] Code Kommentare
 - [ ] Ton

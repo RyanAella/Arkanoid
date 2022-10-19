@@ -9,6 +9,8 @@ namespace _Scripts.Blocks
         [SerializeField] private int blockLife;
         [SerializeField] private GameObject powerUpPrefab;
 
+        public static int _obstacleCounter = 0;
+        
         private static readonly float PowerUpPercentage = 0.2f;
 
         private PowerUpType _powerUpType;
@@ -16,7 +18,13 @@ namespace _Scripts.Blocks
 
         public void Awake()
         {
+            _obstacleCounter++;
             ChoosePowerUp();
+        }
+
+        public static int GetObstacleCounter()
+        {
+            return _obstacleCounter;
         }
 
         public void Damage()
@@ -34,10 +42,11 @@ namespace _Scripts.Blocks
         {
             if (_hasPowerUp)
             {
-                var powerUp = Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
+                var powerUp = Instantiate(powerUpPrefab, transform.position, Quaternion.identity, GameObject.Find("=== Game ===").transform);
                 powerUp.GetComponent<PowerUpController>().type = _powerUpType;
             }
 
+            _obstacleCounter--;
             Destroy(gameObject);
         }
 

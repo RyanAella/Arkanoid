@@ -55,6 +55,8 @@ namespace _Scripts.Ball
                 var dist = ballPos.x - paddlePos.x;
                 _xDirection = dist / maxDist;
                 _zDirection = -_zDirection;
+                
+                transform.GetComponent<AudioSource>().Play();
             }
         }
 
@@ -88,6 +90,7 @@ namespace _Scripts.Ball
             if ((pos.z + scale.z / 2) >= _borderTop)
             {
                 _zDirection = -_zDirection;
+                transform.GetComponent<AudioSource>().Play();
             }
             else if ((pos.z - scale.z / 2) <= _borderBottom) // Lost because reached bottom
             {
@@ -97,6 +100,7 @@ namespace _Scripts.Ball
                      ((pos.x + scale.x / 2) >= _borderRight)) // Hiting left or right border
             {
                 _xDirection = -_xDirection;
+                transform.GetComponent<AudioSource>().Play();
             }
 
             transform.position += new Vector3(_xDirection * speed, 0, _zDirection * speed) * Time.deltaTime;
@@ -134,7 +138,7 @@ namespace _Scripts.Ball
 
         private void Die()
         {
-            // Debug.Log("Ball Died");
+            Debug.Log("Ball Died");
             var manager = GameObject.Find("GameManager").GetComponent<GameManager>();
             manager.TakeDamage();
             manager.StopTimer();

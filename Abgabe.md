@@ -12,10 +12,11 @@
 - [x] Steine die mehrfach getroffen werden müssen
 
 
-- [ ] Mindestens 2 Powerups 
+- [x] Mindestens 2 Powerups 
   - [x] Paddle größer
-  - [ ] Paddle hält Ball fest
-  - [ ] mehrere Bälle
+  - [x] Paddle wird schneller
+  - [ ] **Paddle hält Ball fest**
+  - [ ] **mehrere Bälle**
   - [ ] Slowdown
   - [ ] Schießen
 
@@ -34,4 +35,6 @@
 - Eigene kreative Ideen
 
 
-- 2 Level von Hand bauen. </br> Wenn im ersten alle Blöcke weg sind, VictoryScreen. Button mit nextLevel. </br> Unity Sceenloader!!! 
+- 2 Level von Hand bauen. </br> 
+Wenn im ersten alle Blöcke weg sind, VictoryScreen. Button mit nextLevel. </br> 
+Unity Sceenloader!!!

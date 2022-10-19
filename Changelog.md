@@ -2,6 +2,16 @@
 
 ## [Unreleased]
 
+## [0.7.0] - 2022-10-19
+
+### Added
+- Sound to ball when hitting wall or paddle
+- Two different Levels
+- Choose Level in Main Menu
+- Correct win/loose behaviour and screen
+- Correct button behaviours
+
+
 ## [0.6.0] - 2022-10-17
 
 ### Added
