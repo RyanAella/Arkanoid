@@ -9,13 +9,16 @@ namespace _Scripts.Ball
         [SerializeField] private LayerMask mask;
 
         private float _zDirection = 1;
-        private float _xDirection = 0;
+        private float _xDirection;
 
         // x and z Coordinates
         private float _borderLeft, _borderRight;
         private float _borderTop, _borderBottom;
 
         private bool _running;
+        private bool _sticky = false;
+
+        private int _stickTimes = 0;
 
         private const float YPos = 0.25f;
 
@@ -27,8 +30,20 @@ namespace _Scripts.Ball
 
         public void Update()
         {
-            if (GameManager.running && _running)
+            if (GameManager.Running && _running)
             {
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    Launch();
+                }
+
+                if (_sticky && _zDirection == 0)
+                {
+                    var pos = transform.position;
+                    var paddlePos = GameObject.Find("Paddle").transform.position;
+                    transform.position = new Vector3(paddlePos.x, YPos, pos.z);
+                }
+
                 BallMovement();
             }
             else
@@ -50,13 +65,31 @@ namespace _Scripts.Ball
                 var paddle = other.transform;
                 var paddlePos = paddle.position;
                 var paddleScale = paddle.localScale;
-
+                
                 var maxDist = 0.5f * paddleScale.x + 0.25f * ballScale.x;
                 var dist = ballPos.x - paddlePos.x;
-                _xDirection = dist / maxDist;
-                _zDirection = -_zDirection;
                 
-                transform.GetComponent<AudioSource>().Play();
+                if (_sticky && _stickTimes > 0)
+                {
+                    Debug.Log(_stickTimes);
+                    _xDirection = 0;
+                    _zDirection = 0;
+                    ball.position = new Vector3(paddlePos.x, paddlePos.y, paddlePos.z + 0.4f);
+                    _stickTimes--;
+
+                    if (_stickTimes == 0)
+                    {
+                        Debug.Log("StickTimes-- " + _stickTimes);
+                        _sticky = false;
+                    }
+                }
+                else
+                {
+                    _xDirection = dist / maxDist;
+                    _zDirection = -_zDirection;
+
+                    transform.GetComponent<AudioSource>().Play();
+                }
             }
         }
 
@@ -126,6 +159,8 @@ namespace _Scripts.Ball
                 {
                     _zDirection = -_zDirection;
                 }
+                
+                transform.GetComponent<AudioSource>().Play();
 
                 foreach (var coll in colliders)
                 {
@@ -143,6 +178,12 @@ namespace _Scripts.Ball
             manager.TakeDamage();
             manager.StopTimer();
             Destroy(gameObject);
+        }
+
+        public void EnableSticky(int stick)
+        {
+            _sticky = true;
+            _stickTimes = stick;
         }
     }
 }

@@ -9,9 +9,9 @@ namespace _Scripts.Blocks
         [SerializeField] private int blockLife;
         [SerializeField] private GameObject powerUpPrefab;
 
-        public static int _obstacleCounter = 0;
-        
-        private static readonly float PowerUpPercentage = 0.2f;
+        public static int _obstacleCounter;
+
+        private static readonly float PowerUpPercentage = 1.0f;
 
         private PowerUpType _powerUpType;
         private bool _hasPowerUp;
@@ -30,7 +30,7 @@ namespace _Scripts.Blocks
         public void Damage()
         {
             blockLife -= 1;
-            ScoreBehaviour.score += 1;
+            ScoreBehaviour.Score += 1;
 
             if (blockLife == 0)
             {
@@ -42,11 +42,13 @@ namespace _Scripts.Blocks
         {
             if (_hasPowerUp)
             {
-                var powerUp = Instantiate(powerUpPrefab, transform.position, Quaternion.identity, GameObject.Find("=== Game ===").transform);
+                var powerUp = Instantiate(powerUpPrefab, transform.position, Quaternion.identity,
+                    GameObject.Find("=== Game ===").transform);
                 powerUp.GetComponent<PowerUpController>().type = _powerUpType;
             }
 
             _obstacleCounter--;
+            GameObject.Find("ObstacleAudioSource").GetComponent<AudioSource>().Play();
             Destroy(gameObject);
         }
 
@@ -58,15 +60,21 @@ namespace _Scripts.Blocks
             if (_hasPowerUp)
             {
                 // var powerUpTypes = Enum.GetValues(typeof(PowerUpType));
-
-                if (random.NextDouble() <= 0.5f)
+                var rndValue = random.NextDouble();
+                
+                if (rndValue <= 0.33f)
                 {
                     _powerUpType = PowerUpType.IncreasePaddleSize;
                 }
-                else
+                else if (rndValue <= 0.66f)
                 {
                     _powerUpType = PowerUpType.IncreasePaddleSpeed;
                 }
+                else
+                {
+                    _powerUpType = PowerUpType.StickyBall;
+                }
+                Debug.Log(_powerUpType);
             }
         }
     }

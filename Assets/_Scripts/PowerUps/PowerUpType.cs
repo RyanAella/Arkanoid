@@ -4,6 +4,6 @@
     {
         IncreasePaddleSize,
         IncreasePaddleSpeed,
-        IncreaseBallNumber
+        StickyBall
     }
 }

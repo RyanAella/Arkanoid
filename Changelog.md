@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+## [0.8.0] - 2022-10-20
+
+### Added
+- Sound when destroying block
+- Sound when catching powerUp
+- Third powerUp
+
+
 ## [0.7.0] - 2022-10-19
 
 ### Added

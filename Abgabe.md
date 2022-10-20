@@ -15,8 +15,8 @@
 - [x] Mindestens 2 Powerups 
   - [x] Paddle größer
   - [x] Paddle wird schneller
-  - [ ] **Paddle hält Ball fest**
-  - [ ] **mehrere Bälle**
+  - [x] **Paddle hält Ball fest**
+  - [ ] mehrere Bälle
   - [ ] Slowdown
   - [ ] Schießen
 
@@ -33,8 +33,3 @@
 - Atemberaubende Grafik
 
 - Eigene kreative Ideen
-
-
-- 2 Level von Hand bauen. </br> 
-Wenn im ersten alle Blöcke weg sind, VictoryScreen. Button mit nextLevel. </br> 
-Unity Sceenloader!!!

@@ -8,9 +8,9 @@ namespace _Scripts.UI
     {
         private static string _message;
 
-        private static int _nextLevelIndex = 0;
+        private static int _nextLevelIndex;
 
-        private TextMeshProUGUI victoryText;
+        private TextMeshProUGUI _victoryText;
 
         private void Awake()
         {
@@ -27,16 +27,16 @@ namespace _Scripts.UI
 
         private void Start()
         {
-            victoryText = GameObject.Find("Victory Text").GetComponent<TextMeshProUGUI>();
+            _victoryText = GameObject.Find("Victory Text").GetComponent<TextMeshProUGUI>();
         }
 
         void Update()
         {
-            var time = GameManager.time;
+            var time = GameManager.Time;
             var vTime = time.ToString("F2");
-            var score = ScoreBehaviour.score;
+            var score = ScoreBehaviour.Score;
 
-            victoryText.SetText("Score: " + score + "\nTime: " + vTime + "\n \nYou " + _message);
+            _victoryText.SetText("Score: " + score + "\nTime: " + vTime + "\n \nYou " + _message);
         }
 
         public static void SetMessage(bool win)
@@ -44,10 +44,10 @@ namespace _Scripts.UI
             var maxIndex = SceneManager.sceneCountInBuildSettings - 1;
             var activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-            if (!(maxIndex == activeSceneIndex))
+            if (maxIndex != activeSceneIndex)
             {
                 var buttonText = GameObject.Find("RestartLevelButton").GetComponentInChildren<TextMeshProUGUI>();
-                
+
                 if (win)
                 {
                     _nextLevelIndex = activeSceneIndex + 1;

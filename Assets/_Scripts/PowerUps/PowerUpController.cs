@@ -1,4 +1,4 @@
-﻿using System;
+﻿using _Scripts.Ball;
 using _Scripts.Paddle;
 using UnityEngine;
 
@@ -7,6 +7,7 @@ namespace _Scripts.PowerUps
     public class PowerUpController : MonoBehaviour
     {
         [SerializeField] private float speed = 5f;
+        [SerializeField] private int stickTimes = 3;
 
         public PowerUpType type;
 
@@ -21,6 +22,9 @@ namespace _Scripts.PowerUps
                 case PowerUpType.IncreasePaddleSpeed:
                     GetComponent<MeshRenderer>().material = (Material)Resources.Load("Materials/SpeedPowerUp");
                     break;
+                case PowerUpType.StickyBall:
+                    GetComponent<MeshRenderer>().material = (Material)Resources.Load("Materials/StickyPowerUp");
+                    break;
             }
         }
 
@@ -34,7 +38,6 @@ namespace _Scripts.PowerUps
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                Debug.Log("Hit Player");
                 switch (type)
                 {
                     case PowerUpType.IncreasePaddleSize:
@@ -43,12 +46,16 @@ namespace _Scripts.PowerUps
                     case PowerUpType.IncreasePaddleSpeed:
                         IncreasePaddleSpeed(other.gameObject);
                         break;
+                    case PowerUpType.StickyBall:
+                        MakeBallSticky();
+                        break;
                 }
+                GameObject.Find("PowerUpAudioSource").GetComponent<PowerUpAudioController>().PlayAudio(type);
                 Destroy(gameObject);
             }
         }
 
-        private static void ChangePaddleSize(GameObject paddle)
+        private void ChangePaddleSize(GameObject paddle)
         {
             var scale = paddle.transform.localScale.x;
             if (scale < 4.5f)
@@ -57,13 +64,19 @@ namespace _Scripts.PowerUps
             }
         }
 
-        private static void IncreasePaddleSpeed(GameObject paddle)
+        private void IncreasePaddleSpeed(GameObject paddle)
         {
             var speed = paddle.GetComponent<PaddleController>().speed;
             if (speed < 10)
             {
                 paddle.GetComponent<PaddleController>().speed += 1f;   
             }
+        }
+        
+        private void MakeBallSticky()
+        {
+            var ball = GameObject.FindWithTag("Ball");
+            ball.GetComponent<BallController>().EnableSticky(stickTimes);
         }
     }
 }

@@ -112,3 +112,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockLife: 3
   powerUpPrefab: {fileID: 4685334687254351537, guid: 1f2eef17ab9e60a40bec9303a776ca65, type: 3}
+  obstacleAudio: {fileID: 3865981454850722342, guid: 227ac313870081849ba1db967cc559cc, type: 3}

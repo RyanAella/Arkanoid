@@ -6,11 +6,11 @@
   - 
   - [ ] Spielstarten
     - [ ] Spielmodi (Endlos, Szenario*)
-    - [ ] Level/Szenario Auswahl (evtl. auch für Endlos)*
+    - [x] Level/Szenario Auswahl (evtl. auch für Endlos)*
   - [ ] Einstellungen*
   - [x] Spiel beenden
 - [ ] Level-UI
-  - [ ] Win/Loose UI (Wiederholen oder Verlassen)
+  - [x] Win/Loose UI (Wiederholen oder Verlassen)
   - [ ] Endlos:
     - [x] Timer 
     - [ ] Bestzeit oder Highscore
@@ -27,7 +27,7 @@
     - [ ] Ball wird mit der Zeit schneller bis evtl. Max
   - [ ] Szenario:
     - [x] Mehrere Leben ca. 3
-    - [ ] Hindernisse die zerschossen werden müssen, um das Szenario zu beenden (Win Kondition)
+    - [x] Hindernisse die zerschossen werden müssen, um das Szenario zu beenden (Win Kondition)
     - [ ] Hindernisse (Wände) die nicht zerstört werden können, müssen umgangen werden
     - [ ] Powerups
       - [x] Breiterer Schläger
@@ -48,7 +48,7 @@
 - [x] **Vor Abgabe: Coderefactoring**
 - [x] Größere Blöcke
 - [x] Win/Loose Anzeige
-- [ ] Drittes PowerUp einfügen
+- [x] Drittes PowerUp einfügen
 - [ ] Code Kommentare
-- [ ] Ton
-- [ ] Rename Game
+- [x] Ton
+- [ ] Rename Game für Abgabe

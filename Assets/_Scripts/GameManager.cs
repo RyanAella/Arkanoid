@@ -8,17 +8,16 @@ namespace _Scripts
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private GameObject ballPrefab;
-        private static GameManager instance;
 
         [SerializeField] private int maxPlayerLive = 3;
 
-        public static int _currentPlayerLive;
+        public static int CurrentPlayerLive;
 
         // public static int highscore;
-        public static float time;
+        public static float Time;
 
-        public static bool running = false;
-        private static bool gameover = false;
+        public static bool Running;
+        private static bool _gameOver;
 
         // UI
         // [SerializeField] private GameObject scoreboard;
@@ -27,33 +26,28 @@ namespace _Scripts
         [SerializeField] private Canvas scoreboard;
         [SerializeField] private Canvas victoryScreen;
 
-        public static GameManager Instance
-        {
-            get { return instance; }
-        }
-
         void Awake()
         {
-            time = 0;
-            _currentPlayerLive = maxPlayerLive;
+            Time = 0;
+            CurrentPlayerLive = maxPlayerLive;
         }
 
         // Update is called once per frame
         void Update()
         {
             if (BlockController.GetObstacleCounter() == 0) WinOrLoose(true);
-            
-            if (!gameover)
+
+            if (!_gameOver)
             {
-                if (Input.GetKey(KeyCode.Space) && !running)
+                if (Input.GetKey(KeyCode.Space) && !Running)
                 {
                     Debug.Log("Space");
                     StartGame();
                 }
 
-                if (running)
+                if (Running)
                 {
-                    time += Time.deltaTime;
+                    Time += UnityEngine.Time.deltaTime;
                 }
             }
         }
@@ -66,7 +60,6 @@ namespace _Scripts
 
         private void WinOrLoose(bool win)
         {
-            
             // Potential problem: Canvas disable/enable not always working
             // scoreboard.SetActive(false);
             // victoryScreen.SetActive(true);
@@ -75,19 +68,20 @@ namespace _Scripts
             victoryScreen.enabled = true;
 
             StopTimer();
-            Time.timeScale = 0;
-            gameover = true;
+            UnityEngine.Time.timeScale = 0;
+            _gameOver = true;
         }
 
         public void TakeDamage()
         {
-            _currentPlayerLive -= 1;
-            if (_currentPlayerLive > 0)
+            CurrentPlayerLive -= 1;
+            if (CurrentPlayerLive > 0)
             {
                 // Spawn new ball
-                Instantiate(ballPrefab, new Vector3(0, 0.25f, -4.1f), Quaternion.identity, GameObject.Find("=== Game ===").transform);
+                Instantiate(ballPrefab, new Vector3(0, 0.25f, -4.1f), Quaternion.identity,
+                    GameObject.Find("=== Game ===").transform);
             }
-            else if (_currentPlayerLive <= 0)
+            else if (CurrentPlayerLive <= 0)
             {
                 Debug.Log("CurrentPlayerLife is 0");
                 WinOrLoose(false);
@@ -96,12 +90,12 @@ namespace _Scripts
 
         private void StartTimer()
         {
-            running = true;
+            Running = true;
         }
 
         public void StopTimer()
         {
-            running = false;
+            Running = false;
         }
     }
 }

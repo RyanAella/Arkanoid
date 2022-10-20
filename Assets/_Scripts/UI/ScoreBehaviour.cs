@@ -6,39 +6,30 @@ namespace _Scripts.UI
 {
     public class ScoreBehaviour : MonoBehaviour
     {
-        private TextMeshProUGUI textmeshPro;
+        private TextMeshProUGUI _textMeshPro;
+
         // public static float time;
-        public static int score;
-        private int highscore;
+        public static int Score;
+        // private int highscore;
 
         // Start is called before the first frame update
         void Start()
         {
-            textmeshPro = GetComponent<TextMeshProUGUI>();
-        
+            _textMeshPro = GetComponent<TextMeshProUGUI>();
+
             // set score value to be zero
             // time = 0;
-            score = 0;
-            highscore = 0;
+            Score = 0;
+            // highscore = 0;
         }
 
         // Update is called once per frame
         void Update()
         {
-            // if (running == true)
-            // {
-            //     time += Time.deltaTime;
-            // }
-
-            // int currentLife = GameManager._currentPlayerLive;
-            // if (currentLife == 0)
-            // {
-            //     StopTimer();
-            // }
-            string sTime = GameManager.time.ToString("F2");
+            string sTime = GameManager.Time.ToString("F2");
             // update text of Text element
-            textmeshPro.SetText("Time: {0} \nScore: {1} \nHighscore: {2} \nLife: {3}", 
-                Convert.ToSingle(sTime), score, highscore, GameManager._currentPlayerLive);
+            _textMeshPro.SetText("Time: {0} \nScore: {1} \nLife: {2}",
+                Convert.ToSingle(sTime), Score, GameManager.CurrentPlayerLive);
         }
     }
 }
