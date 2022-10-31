@@ -26,7 +26,7 @@ namespace _Scripts.UI
         // Update is called once per frame
         void Update()
         {
-            string sTime = GameManager.Time.ToString("F2");
+            string sTime = GameManager.TimeCounter.ToString("F2");
             // update text of Text element
             _textMeshPro.SetText("Time: {0} \nScore: {1} \nLife: {2}",
                 Convert.ToSingle(sTime), Score, GameManager.CurrentPlayerLive);

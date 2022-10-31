@@ -9,9 +9,9 @@ namespace _Scripts.Blocks
         [SerializeField] private int blockLife;
         [SerializeField] private GameObject powerUpPrefab;
 
-        public static int _obstacleCounter;
+        private static int _obstacleCounter;
 
-        private static readonly float PowerUpPercentage = 1.0f;
+        private static readonly float PowerUpPercentage = 0.35f;
 
         private PowerUpType _powerUpType;
         private bool _hasPowerUp;
@@ -74,7 +74,6 @@ namespace _Scripts.Blocks
                 {
                     _powerUpType = PowerUpType.StickyBall;
                 }
-                Debug.Log(_powerUpType);
             }
         }
     }

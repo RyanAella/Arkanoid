@@ -8,6 +8,7 @@ namespace _Scripts.UI
     {
         private static string _message;
 
+        private static int _activeSceneIndex;
         private static int _nextLevelIndex;
 
         private TextMeshProUGUI _victoryText;
@@ -16,8 +17,6 @@ namespace _Scripts.UI
         {
             var maxIndex = SceneManager.sceneCountInBuildSettings - 1;
             var activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
-
-            Debug.Log("Scene Count Build Index: " + SceneManager.sceneCountInBuildSettings);
 
             if (maxIndex == activeSceneIndex)
             {
@@ -32,7 +31,7 @@ namespace _Scripts.UI
 
         void Update()
         {
-            var time = GameManager.Time;
+            var time = GameManager.TimeCounter;
             var vTime = time.ToString("F2");
             var score = ScoreBehaviour.Score;
 
@@ -42,20 +41,20 @@ namespace _Scripts.UI
         public static void SetMessage(bool win)
         {
             var maxIndex = SceneManager.sceneCountInBuildSettings - 1;
-            var activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            _activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-            if (maxIndex != activeSceneIndex)
+            if (maxIndex != _activeSceneIndex)
             {
                 var buttonText = GameObject.Find("RestartLevelButton").GetComponentInChildren<TextMeshProUGUI>();
 
                 if (win)
                 {
-                    _nextLevelIndex = activeSceneIndex + 1;
+                    _nextLevelIndex = _activeSceneIndex + 1;
                     buttonText.SetText("Next Level");
                 }
                 else
                 {
-                    _nextLevelIndex = activeSceneIndex;
+                    _nextLevelIndex = _activeSceneIndex;
                     buttonText.SetText("Restart Level");
                 }
             }

@@ -8,16 +8,7 @@ namespace _Scripts
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private GameObject ballPrefab;
-
         [SerializeField] private int maxPlayerLive = 3;
-
-        public static int CurrentPlayerLive;
-
-        // public static int highscore;
-        public static float Time;
-
-        public static bool Running;
-        private static bool _gameOver;
 
         // UI
         // [SerializeField] private GameObject scoreboard;
@@ -25,11 +16,26 @@ namespace _Scripts
 
         [SerializeField] private Canvas scoreboard;
         [SerializeField] private Canvas victoryScreen;
+        // [SerializeField] private Canvas escapeScreen;
+        
+        public static int CurrentPlayerLive;
+        public static float TimeCounter;
+
+        public static bool Running;
+        
+        private static bool _gameOver;
+        // private static bool _gamePaused;
 
         void Awake()
         {
-            Time = 0;
+            TimeCounter = 0;
             CurrentPlayerLive = maxPlayerLive;
+            
+            // init on load Scene
+            Time.timeScale = 1;
+            Running = false;
+            _gameOver = false;
+            // _gamePaused = false;
         }
 
         // Update is called once per frame
@@ -41,21 +47,42 @@ namespace _Scripts
             {
                 if (Input.GetKey(KeyCode.Space) && !Running)
                 {
-                    Debug.Log("Space");
                     StartGame();
                 }
 
                 if (Running)
                 {
-                    Time += UnityEngine.Time.deltaTime;
+                    TimeCounter += Time.deltaTime;
                 }
             }
+
+            // if (Input.GetKey(KeyCode.Escape))
+            // {
+            //     if (!_gamePaused)
+            //     {
+            //         // pause game
+            //         Pause();
+            //         Time.timeScale = 0;
+            //         escapeScreen.enabled = true;
+            //         
+            //         _gamePaused = true;
+            //     }
+            //     else
+            //     {
+            //         // resume game
+            //         Run();
+            //         Time.timeScale = 1;
+            //         escapeScreen.enabled = false;
+            //         
+            //         _gamePaused = false;
+            //     }
+            // }
         }
 
         private void StartGame()
         {
             GameObject.FindWithTag("Ball").GetComponent<BallController>().Launch();
-            StartTimer();
+            Run();
         }
 
         private void WinOrLoose(bool win)
@@ -63,18 +90,23 @@ namespace _Scripts
             // Potential problem: Canvas disable/enable not always working
             // scoreboard.SetActive(false);
             // victoryScreen.SetActive(true);
-            VictoryBehaviour.SetMessage(win);
+            
             scoreboard.enabled = false;
             victoryScreen.enabled = true;
 
-            StopTimer();
-            UnityEngine.Time.timeScale = 0;
+            VictoryBehaviour.SetMessage(win);
+            
+            Run();
+            
+            Time.timeScale = 0;
             _gameOver = true;
         }
 
         public void TakeDamage()
         {
             CurrentPlayerLive -= 1;
+            Pause();
+            
             if (CurrentPlayerLive > 0)
             {
                 // Spawn new ball
@@ -83,17 +115,16 @@ namespace _Scripts
             }
             else if (CurrentPlayerLive <= 0)
             {
-                Debug.Log("CurrentPlayerLife is 0");
                 WinOrLoose(false);
             }
         }
 
-        private void StartTimer()
+        private static void Run()
         {
             Running = true;
         }
 
-        public void StopTimer()
+        private static void Pause()
         {
             Running = false;
         }

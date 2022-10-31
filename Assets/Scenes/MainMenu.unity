@@ -227,7 +227,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Arcanoid
+  m_text: 'Arkanoid
 
 
     Main Menu'

@@ -13,7 +13,6 @@ namespace _Scripts.PowerUps
 
         public void Start()
         {
-            Debug.Log("Hello World I'm a " + type);
             switch (type)
             {
                 case PowerUpType.IncreasePaddleSize:

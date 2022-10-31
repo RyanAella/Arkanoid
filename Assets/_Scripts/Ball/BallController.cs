@@ -32,16 +32,22 @@ namespace _Scripts.Ball
         {
             if (GameManager.Running && _running)
             {
-                if (Input.GetKey(KeyCode.Space))
-                {
-                    Launch();
-                }
-
                 if (_sticky && _zDirection == 0)
                 {
                     var pos = transform.position;
                     var paddlePos = GameObject.Find("Paddle").transform.position;
                     transform.position = new Vector3(paddlePos.x, YPos, pos.z);
+
+                    if (Input.GetKey(KeyCode.Space))
+                    {
+                        _zDirection = 1;
+                        
+                        _stickTimes--;
+                        if (_stickTimes == 0)
+                        {
+                            _sticky = false;
+                        }
+                    }
                 }
 
                 BallMovement();
@@ -71,17 +77,9 @@ namespace _Scripts.Ball
                 
                 if (_sticky && _stickTimes > 0)
                 {
-                    Debug.Log(_stickTimes);
                     _xDirection = 0;
                     _zDirection = 0;
                     ball.position = new Vector3(paddlePos.x, paddlePos.y, paddlePos.z + 0.4f);
-                    _stickTimes--;
-
-                    if (_stickTimes == 0)
-                    {
-                        Debug.Log("StickTimes-- " + _stickTimes);
-                        _sticky = false;
-                    }
                 }
                 else
                 {
@@ -164,8 +162,6 @@ namespace _Scripts.Ball
 
                 foreach (var coll in colliders)
                 {
-                    // Debug.Log("Hit: " + colliders.Length + " colliders");
-                    // Debug.Log("Ball hit: " + coll.gameObject.name);
                     coll.GetComponent<BlockController>().Damage();
                 }
             }
@@ -173,10 +169,9 @@ namespace _Scripts.Ball
 
         private void Die()
         {
-            Debug.Log("Ball Died");
             var manager = GameObject.Find("GameManager").GetComponent<GameManager>();
             manager.TakeDamage();
-            manager.StopTimer();
+            // manager.Pause();
             Destroy(gameObject);
         }
 

@@ -1,6 +1,17 @@
 ﻿# Changelog
 
-## [Unreleased]
+## [Released]
+
+## [1.0.0] - 2022-10-23
+
+### Release
+
+
+## [0.8.1] - 2022-10-23
+
+### Changed
+- Bugfixes
+
 
 ## [0.8.0] - 2022-10-20
 
